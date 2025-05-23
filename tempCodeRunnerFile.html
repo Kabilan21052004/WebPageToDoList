@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>To-Do List</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="light-mode">
+  <div class="container">
+    <div class="top-right-buttons">
+      <button id="show-completed">Show Completed</button>
+      <button id="daily-suggestions">Daily Suggestions</button>
+      <button id="theme-toggle">🌙 Dark Mode</button>
+    </div>
+    <div class="custom-task-bar">
+      <input type="text" id="custom-task-bar-input" placeholder="Add a custom task...">
+      <button id="add-custom-task-btn">➕ Add</button>
+    </div>
+    <h1>📝 My To-Do List</h1>
+    <form id="task-form">
+      <input type="text" id="task-input" placeholder="New task..." required>
+      <button type="submit">Add</button>
+    </form>
+    <ul id="task-list"></ul>
+  </div>
+
+  <script src="index.js"></script>
+</body>
+</html>

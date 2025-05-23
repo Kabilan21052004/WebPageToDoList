@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Daily Suggestions</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('bg.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      color: #333;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      width: 400px;
+      max-width: 90vw;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      background: #edf2f7;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 16px;
+      cursor: default;
+      transition: background-color 0.3s ease;
+    }
+
+    li:hover {
+      background-color: #d6bcfa;
+    }
+
+    button {
+      background-color: #5a67d8;
+      border: none;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #434190;
+    }
+
+    #back-btn {
+      margin-top: 20px;
+      width: 100%;
+      font-size: 16px;
+      padding: 10px 0;
+      background-color: #4a5568;
+    }
+
+    #back-btn:hover {
+      background-color: #2d3748;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📋 Daily Suggestions</h1>
+    <ul id="suggestions-list"></ul>
+    <button id="back-btn">⬅️ Back to To-Do List</button>
+  </div>
+
+  <script>
+    const dailySuggestions = [
+      "Drink 2L of water",
+      "Read for 30 minutes",
+      "Take a 10-minute walk",
+      "Plan tomorrow's tasks",
+      "Write a journal entry"
+    ];
+
+    const suggestionsList = document.getElementById('suggestions-list');
+
+    dailySuggestions.forEach((task) => {
+      const li = document.createElement('li');
+      li.textContent = task;
+
+      const addBtn = document.createElement('button');
+      addBtn.textContent = 'Add Task';
+      addBtn.onclick = () => {
+        const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        // Check if task already exists to avoid duplicates
+        if (tasks.some(t => t.text === task)) {
+          alert(`Task "${task}" is already in your list.`);
+          return;
+        }
+        tasks.push({ text: task, completed: false });
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+        alert(`Task "${task}" added!`);
+      };
+
+      li.appendChild(addBtn);
+      suggestionsList.appendChild(li);
+    });
+
+    document.getElementById('back-btn').addEventListener('click', () => {
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>

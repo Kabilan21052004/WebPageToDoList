@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Completed Tasks</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('bg.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      color: #333;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      width: 400px;
+      max-width: 90vw;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    li {
+      background: #edf2f7;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+      color: gray;
+      text-decoration: line-through;
+      cursor: default;
+      transition: background-color 0.3s ease;
+    }
+
+    li:hover {
+      background-color: #cbd5e0;
+    }
+
+    #back-btn {
+      margin-top: 20px;
+      width: 100%;
+      font-size: 16px;
+      padding: 10px 0;
+      background-color: #4a5568;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #back-btn:hover {
+      background-color: #2d3748;
+    }
+
+    .no-tasks {
+      text-align: center;
+      font-style: italic;
+      color: #718096;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>✅ Completed Tasks</h1>
+    <ul id="completed-list"></ul>
+    <button id="back-btn">⬅️ Back to To-Do List</button>
+  </div>
+
+  <script>
+    const completedList = document.getElementById('completed-list');
+    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    const completedTasks = tasks.filter(task => task.completed);
+
+    if (completedTasks.length === 0) {
+      const noTasksMsg = document.createElement('p');
+      noTasksMsg.textContent = "No completed tasks found.";
+      noTasksMsg.classList.add('no-tasks');
+      completedList.appendChild(noTasksMsg);
+    } else {
+      completedTasks.forEach(task => {
+        const li = document.createElement('li');
+        li.textContent = task.text;
+        completedList.appendChild(li);
+      });
+    }
+
+    document.getElementById('back-btn').addEventListener('click', () => {
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>
